@@ -5,6 +5,7 @@ import {
 } from "./styledMap";
 
 const Map = ({ casesType, mapCountries, center, zoom }) => {
+console.log("🚀 ~ file: Map.js ~ line 8 ~ Map ~ casesType", casesType)
     return (
         <Container>
             <MapContainer center={center} zoom={zoom}>
