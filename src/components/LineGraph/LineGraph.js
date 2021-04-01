@@ -81,7 +81,7 @@ const LineGraph = ({ casesType = "cases" }) => {
 
     return (
         <Container>
-            <GraphTitle>Worldwide new cases</GraphTitle>
+            <GraphTitle>Worldwide new {casesType}</GraphTitle>
             {data?.length > 0 && (
                 <Line
                     data={{

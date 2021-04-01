@@ -1,3 +1,4 @@
+import numeral from "numeral";
 import {
     Container,
     TableTitle,
@@ -16,7 +17,7 @@ const Table = ({ tableData }) => {
                     <TableRow>
                         <TableData>{country}</TableData>
                         <TableData>
-                            <Strong>{cases}</Strong>
+                            <Strong>{numeral(cases).format("0,0")}</Strong>
                         </TableData>
                     </TableRow>
                 ))}

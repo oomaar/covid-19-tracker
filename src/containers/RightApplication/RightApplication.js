@@ -5,14 +5,14 @@ import {
 import { Card } from "@material-ui/core";
 import { LineGraph, Table } from "../../components";
 
-const RightApplication = ({ tableData }) => {
+const RightApplication = ({ tableData, casesType }) => {
     return (
         <Container>
             <Card>
                 <Table
                     tableData={tableData}
                 />
-                <LineGraph />
+                <LineGraph casesType={casesType} />
             </Card>
         </Container>
     )
