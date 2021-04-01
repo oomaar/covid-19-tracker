@@ -1,18 +1,20 @@
 import {
     Container,
-    TableTitle,
     ChartTitle,
 } from "./styledRightApplication";
 import { Card } from "@material-ui/core";
+import { Table } from "../../components";
 
-const RightApplication = () => {
+const RightApplication = ({ tableData }) => {
     return (
         <Container>
             <Card>
                 {/* Table */}
-                <TableTitle>Live Cases by Country</TableTitle>
+                <Table
+                    tableData={tableData}
+                />
                 {/* Graph */}
-                <TableTitle>Worldwide new cases</TableTitle>
+                <ChartTitle>Worldwide new cases</ChartTitle>
             </Card>
         </Container>
     )

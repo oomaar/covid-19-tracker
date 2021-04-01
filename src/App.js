@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { LeftApplication, RightApplication } from "./containers";
+import { sortData } from "./utils/sortedData";
 
 
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
-    .then(res => res.json())
-    .then(data => setCountryInfo(data))
+      .then(res => res.json())
+      .then(data => setCountryInfo(data))
   }, []);
 
   useEffect(() => {
@@ -23,7 +25,10 @@ const App = () => {
             name: country.country,
             value: country.countryInfo.iso2
           }));
+
+          const sortedData = sortData(data);
           setCountries(countries);
+          setTableData(sortedData);
         });
     };
 
@@ -53,7 +58,9 @@ const App = () => {
         countries={countries}
         country={country}
       />
-      <RightApplication />
+      <RightApplication
+        tableData={tableData}
+      />
     </Application>
   );
 }
