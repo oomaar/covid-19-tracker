@@ -5,17 +5,17 @@ import { sortData } from "./utils/sortedData";
 import "leaflet/dist/leaflet.css";
 
 const App = () => {
-  const [casesType, setCasesType] = useState("cases");
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
   const [mapZoom, setMapZoom] = useState(3);
+  const [mapCountries, setMapCountries] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({
     lat: 20.80746,
     lng: -40.4796
   });
-  const [mapCountries, setMapCountries] = useState([]);
   
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -65,8 +65,7 @@ const App = () => {
       }
     });
   };
-  
-  console.log("🚀 ~ file: App.js ~ line 14 ~ App ~ mapCenter", mapCenter)
+
   return (
     <Application>
       <LeftApplication
@@ -78,8 +77,10 @@ const App = () => {
         zoom={mapZoom}
         mapCountries={mapCountries}
         casesType={casesType}
-      />
+        setCasesType={setCasesType}
+        />
       <RightApplication
+        casesType={casesType}
         tableData={tableData}
       />
     </Application>
