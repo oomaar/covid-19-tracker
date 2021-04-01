@@ -23,26 +23,41 @@ const casesTypeColors = {
     },
 };
 
-export const showDataOnMap = (data, casesType = "cases") => (
-    data.map(country => (
-        <Circle
-            center={[country.countryInfo.lat, country.countryInfo.long]}
-            fillOpacity={0.4}
-            color={casesTypeColors[casesType].hex}
-            fillColor={casesTypeColors[casesType].hex}
-            radius={Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier}
-        >
-            <Popup>
-                <InfoContainer>
-                    <InfoFlag
-                        style={{ backgroundImage: `url(${country.countryInfo.flag})` }}
-                    />
-                    <InfoName>{country.country}</InfoName>
-                    <InfoData>Cases: {numeral(country.cases).format("0, 0")}</InfoData>
-                    <InfoData>Recovered: {numeral(country.recovered).format("0, 0")}</InfoData>
-                    <InfoData>Deaths: {numeral(country.deaths).format("0, 0")}</InfoData>
-                </InfoContainer>
-            </Popup>
-        </Circle>
-    ))
-);
+const setColors = (casesType) => {
+    if (casesType === "cases") {
+        return casesTypeColors.cases.hex;
+    } else if (casesType === "recovered") {
+        return casesTypeColors.recovered.hex;
+    } else if (casesType === "deaths") {
+        return casesTypeColors.deaths.hex;
+    }
+}
+
+export const showDataOnMap = (data, casesType) => {
+
+    return (
+        data.map(country => (
+            <Circle
+                center={[country.countryInfo.lat, country.countryInfo.long]}
+                color={setColors(casesType)}
+                fillColor={setColors(casesType)}
+                fillOpacity={0.4}
+                radius={
+                    Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
+                }
+            >
+                <Popup>
+                    <InfoContainer>
+                        <InfoFlag
+                            style={{ backgroundImage: `url(${country.countryInfo.flag})` }}
+                        />
+                        <InfoName>{country.country}</InfoName>
+                        <InfoData>Cases: {numeral(country.cases).format("0, 0")}</InfoData>
+                        <InfoData>Recovered: {numeral(country.recovered).format("0, 0")}</InfoData>
+                        <InfoData>Deaths: {numeral(country.deaths).format("0, 0")}</InfoData>
+                    </InfoContainer>
+                </Popup>
+            </Circle>
+        ))
+    );
+};
